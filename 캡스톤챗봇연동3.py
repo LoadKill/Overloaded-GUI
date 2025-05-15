@@ -13,6 +13,9 @@ from PyQt5.QtGui import QColor
 import ctypes
 import os
 
+from PyQt5.QtWidgets import QInputDialog
+
+
 # libvlc.dll 경로 설정
 os.add_dll_directory(r"C:\Program Files\VideoLAN\VLC")
 
@@ -182,9 +185,9 @@ class CCTVViewer(QWidget):
             self.button_layout.addWidget(btn)
 
         # URL 영상 연결 버튼
-        url_video_button = QPushButton("URL 영상 연결")
-        url_video_button.setFixedHeight(50)
-        url_video_button.setStyleSheet("""
+        url_button = QPushButton("URL로 영상 재생")
+        url_button.setFixedHeight(50)
+        url_button.setStyleSheet("""
             QPushButton {
                 background-color: #efefef;
                 border: none;
@@ -201,8 +204,8 @@ class CCTVViewer(QWidget):
                 background-color: #d0d0d0;
             }
         """)
-        url_video_button.clicked.connect(self.prompt_for_video_url)
-        self.button_layout.addWidget(url_video_button)
+        url_button.clicked.connect(self.prompt_for_video_url)
+        self.button_layout.addWidget(url_button)
 
         # 챗봇 열기 버튼
         chatbot_button = QPushButton("챗봇 열기")
@@ -212,7 +215,7 @@ class CCTVViewer(QWidget):
                 background-color: #007aff;
                 color: white;
                 border: none;
-                border-radius: 16px;
+                border-radius: 16px; 
                 padding: 12px;
                 font-size: 16px;
                 font-weight: bold;
@@ -241,8 +244,11 @@ class CCTVViewer(QWidget):
 
     def play_stream(self, url):
         print(f"재생할 CCTV URL: {url}")
+        self.player.stop()
         media = self.instance.media_new(url)
         self.player.set_media(media)
+        result = self.player.play()
+        print(f"play() 반환값: {result}")
         self.player.play()
 
     def toggle_chatbot(self):
@@ -264,4 +270,3 @@ if __name__ == "__main__":
     viewer = CCTVViewer()
     viewer.show()
     sys.exit(app.exec_())
-
