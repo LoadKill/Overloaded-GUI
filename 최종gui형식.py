@@ -11,7 +11,7 @@ import chatbot
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-import ctypesf
+import ctypes
 
 # libvlc.dll 경로 설정 (Windows 용)
 os.add_dll_directory(r"C:\Program Files\VideoLAN\VLC")
