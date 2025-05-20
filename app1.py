@@ -19,7 +19,7 @@ from Detection.tracker import init_tracker, update_tracks
 from Detection.db import save_illegal_vehicle, init_db, is_already_saved
 from Detection.utils import match_with_track
 
-os.add_dll_directory(r"C:\Program Files\VideoLAN\VLC")
+os.add_dll_directory(r"C:\Program Files\VideoLAN\VLC") # vlc경로 확인해서 고쳐주세요!!
 load_dotenv()
 api_key = os.getenv('ITS_API_KEY')
 
