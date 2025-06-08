@@ -14,8 +14,6 @@ from datetime import datetime
 
 # VLC DLL 경로 추가 (Windows)
 os.add_dll_directory(r"C:\Program Files\VLC")
-
-# 환경변수 로드
 load_dotenv()
 api_key = os.getenv('ITS_API_KEY')
 google_api_key = os.getenv('GOOGLE_API_KEY')
@@ -193,7 +191,9 @@ class CCTVViewer(QWidget):
             return "주소 정보 가져오기 실패"
 
     def update_timers(self):
+        # 실시간 시계
         self.current_clock = datetime.now().strftime('%H:%M:%S')
+        # 스톱워치
         if self.watch_start_time:
             elapsed = datetime.now() - self.watch_start_time
             h, rem = divmod(elapsed.seconds, 3600)
@@ -205,6 +205,7 @@ class CCTVViewer(QWidget):
             self.update_video_desc_label(show_time=False)
 
     def update_video_desc_label(self, show_time=False):
+        # 두 정보 모두 포함해서 표시
         if show_time:
             self.video_desc_label.setText(
                 f"현재 시간: {self.current_clock}\n"
@@ -217,6 +218,7 @@ class CCTVViewer(QWidget):
     def play_stream(self, url, cctvname, coordx=None, coordy=None):
         self.watch_start_time = datetime.now()
         self.elapsed_str = "00:00:00"
+        
         print(f"\n🎥 재생할 CCTV URL: {url}")
         self.player.stop()
         media = self.instance.media_new(url)
@@ -251,12 +253,3 @@ class CCTVViewer(QWidget):
         self.elapsed_str = "00:00:00"
         self.current_cctv_desc = "영상이 중지되었습니다."
         self.update_video_desc_label(show_time=False)
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    signals = WorkerSignals()
-    viewer = CCTVViewer(signals)
-    viewer.show()
-    sys.exit(app.exec_())
-
