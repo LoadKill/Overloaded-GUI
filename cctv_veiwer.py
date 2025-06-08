@@ -14,7 +14,7 @@ from datetime import datetime
 
 # VLC DLL 경로 추가 (Windows)
 os.add_dll_directory(r"C:\Program Files\VLC")
-s
+
 # 환경변수 로드
 load_dotenv()
 api_key = os.getenv('ITS_API_KEY')
@@ -259,3 +259,4 @@ if __name__ == "__main__":
     viewer = CCTVViewer(signals)
     viewer.show()
     sys.exit(app.exec_())
+
