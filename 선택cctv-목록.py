@@ -80,7 +80,7 @@ class CCTVViewer(QWidget):
 
         # 📌 시연 영상 URL 리스트
         self.test_urls = [
-            "",  # 시연1 영상 URL 나중에 넣으면 됨용
+            "",  # 시연1 영상 URL 추후 삽입 가능
             "",  # 시연2
             ""   # 시연3
         ]
@@ -113,7 +113,7 @@ class CCTVViewer(QWidget):
         # 📌 빈공간 stretch
         self.button_layout.addStretch()
 
-    def get_route_cctv_list(self): # CCTV리스트 가지고 와서 도로별로 나눠주는 함수~
+    def get_route_cctv_list(self): # CCTV리스트 가지고 와서 도로별로 나눠주는 함수
         api_key = "b226eb0b73d2424487a3928f519a9ea4"
         api_url = f"https://openapi.its.go.kr:9443/cctvInfo?apiKey={api_key}&type=ex&cctvType=1&minX=124&maxX=130&minY=33&maxY=39&getType=json"
         response = requests.get(api_url)
